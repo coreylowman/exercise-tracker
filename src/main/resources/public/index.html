@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ExerciseTracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<iframe id="hidden_iframe" name="hidden_iframe" style="width: 0; height: 0;visibility: hidden;"></iframe>
+
+<table id="exercises" border="1" cellpadding="5" cellspacing="0">
+    <tr id="exercisesHeader">
+        <th></th>
+    </tr>
+</table>
+<br/>
+<table id="entries" border="1" cellpadding="5" cellspacing="0">
+    <tr>
+        <th onclick="sortByIndex(0, byDate)">Date</th>
+        <th onclick="sortByIndex(1, byStringVal)">Exercise</th>
+        <th onclick="sortByIndex(2, byStringVal)">Body Part</th>
+        <th onclick="sortByIndex(3, byInt)"># Reps</th>
+        <th onclick="sortByIndex(4, byInt)">Rep duration</th>
+        <th onclick="sortByIndex(5, byInt)">Rep weight</th>
+        <th onclick="sortByIndex(6, byStringVal)">note</th>
+        <th>actions</th>
+    </tr>
+
+    <tr bgcolor="#72a8ff">
+        <form method="POST" action="/entries" target="hidden_iframe" enctype="text/plain">
+            <td><input type="date" name="date" id="select_date" required="true"></td>
+            <td>
+                <select name="exerciseId" id="select_exercise" onchange="exerciseOnChange()">
+                </select>
+            </td>
+            <td><input id="exercise_bodypart" type="text" disabled="true"></td>
+            <td><input type="number" name="numReps" placeholder="Number of Reps" required="true"></td>
+            <td><input type="number" name="repDuration_sec" placeholder="Rep Duration" required="true"></td>
+            <td><input type="number" name="repWeight_lbs" placeholder="Rep Weight" required="true"></td>
+            <td><input type="text" name="note" placeholder="Note" value=""></td>
+            <td><input type="submit" value="add" required="true"></td>
+        </form>
+    </tr>
+
+</table>
+<br/>
+
+<form method="POST" action="/exercises" target="hidden_iframe" enctype="text/plain">
+    <select id="select_bodyPart" name="bodyPartId">
+    </select>
+    <input type="text" name="name" placeholder="name" required="true">
+    <input type="text" name="description" placeholder="description">
+    <input type="text" name="url" placeholder="url">
+    <input type="submit" value="Add Exercise" required="true">
+</form>
+
+<br/>
+
+<form method="POST" action="/bodyParts" target="hidden_iframe" enctype="text/plain">
+    <input type="text" name="name" placeholder="name" required="true">
+    <input type="submit" value="Add Body Part" required="true">
+</form>
+
+<script src="client.js"></script>
+</body>
+</html>
