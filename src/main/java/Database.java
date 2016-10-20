@@ -32,7 +32,7 @@ public class Database {
 
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            connection = DriverManager.getConnection(url + "?user=app&password=db1passwd2");
+            connection = DriverManager.getConnection(url, user, password);
 
             ResultSet resultSet = select("*", BODYPARTS_TABLE);
             while (resultSet.next()) {

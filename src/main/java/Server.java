@@ -11,7 +11,12 @@ public class Server {
     private static Database database;
 
     public static void main(String[] args) {
-        database = new Database(Database.DEFAULT_URL, "dbadmin", "mysql");
+        if (args.length < 2) {
+            System.out.println("Usage: exercise-tracker <username> <password>");
+            System.exit(1);
+        }
+
+        database = new Database(Database.DEFAULT_URL, args[0], args[1]);
 
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
 
